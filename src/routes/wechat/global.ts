@@ -1,16 +1,9 @@
-import WechatAPI from 'wechat-api'
-import WechatOAuth from 'wechat-oauth'
-// import WechatMenu from './wechat-menu.json'
+import Wechat from '@/wechat/wechat'
 
-const appid = process.env.WECHAT_APPID
-const appSecret = process.env.WECHAT_APPSECRET
+// import WechatMenu from './wechat-menu.json'
 const token = process.env.WECHAT_TOKEN
 const wechatUrl = process.env.WECHAT_URL
-
-const wechatOAuth = new WechatOAuth(appid, appSecret)
-
-//wechat init
-const wechatAPI = new WechatAPI(appid, appSecret)
+const appid = process.env.WECHAT_APPID
 
 function fixUrl(url: string): string {
   return wechatUrl + url
@@ -22,12 +15,12 @@ const getWeChatAuthorizeUrl = function (redirect: string, needAuth: boolean) {
   if (needAuth) {
     scope = 'snsapi_userinfo'
   }
-  return wechatOAuth.getAuthorizeURL(fixUrl(redirect), 1, scope)
+  return Wechat.oauth.getAuthorizeURL(fixUrl(redirect), 1, scope)
 }
 
 //update menus
 function updateMenu(menu: any) {
-  wechatAPI.createMenu(menu, function (err: Error) {
+  Wechat.api.createMenu(menu, function (err: Error) {
     if (err) {
       console.error('createMenu failed' + err)
     } else {
@@ -37,14 +30,12 @@ function updateMenu(menu: any) {
 }
 
 export default {
-  wechatOAuth,
-  wechatAPI,
   fixUrl,
   getWeChatAuthorizeUrl,
   updateMenu,
   wechatConfig: {
     token,
-    appid,
+    appid
     // encodingAESKey: 'encodinAESKey'
   }
 }

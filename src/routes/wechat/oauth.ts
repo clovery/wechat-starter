@@ -1,13 +1,12 @@
 import express from 'express'
-
-import global from './global'
+import { wechatOAuth } from '@/wechat/wechat'
 
 export const oauth = function (req: express.Request, res: express.Response) {
   console.log('go to oauth!')
 
   var code = req.body.code
 
-  global.wechatOAuth.getAccessToken(code, function (err: Error, baseUserInfo: any) {
+  wechatOAuth.getAccessToken(code, function (err: Error, baseUserInfo: any) {
     if (err) {
       console.error(err)
       res.send(500)

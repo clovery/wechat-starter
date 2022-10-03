@@ -6,6 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' -r tsconfig-paths/register src/index.ts",
     "build": "NODE_ENV=production rimraf dist && tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./dist",
+    "wechat:menu.create": "dotenv -e .env ts-node ./src/wechat/cli menu.create",
     "prepare": "husky install"
   },
   "keywords": [
@@ -31,6 +32,7 @@
     "@types/morgan": "^1.9.3",
     "@types/serve-static": "^1.15.0",
     "cross-env": "^7.0.3",
+    "dotenv-cli": "^6.0.0",
     "husky": "^8.0.1",
     "install-deps-postmerge": "^2.0.1",
     "lint-staged": "^13.0.3",

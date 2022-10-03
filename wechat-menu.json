@@ -1,7 +1,7 @@
 ﻿{
     "button": [
     {
-        "name": "Wei报表",
+        "name": "我的报表",
         "sub_button": [{
             "type": "click",
             "name": "获取列表",
@@ -19,7 +19,7 @@
             "type": "scancode_push",
             "name": "扫一扫",
             "key": "scancode"
-        }, 
+        },
         {
             "type": "pic_photo_or_album",
             "name": "拍照传图",
