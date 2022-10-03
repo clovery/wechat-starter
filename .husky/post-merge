@@ -1,0 +1,5 @@
+#!/bin/sh
+export PATH="/usr/local/bin/:$PATH"
+. "$(dirname "$0")/_/husky.sh"
+
+node node_modules/install-deps-postmerge/build/bin/index.js

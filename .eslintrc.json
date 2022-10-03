@@ -1,0 +1,16 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "project": "./tsconfig.eslint.json"
+  },
+  "rules": {
+    "no-redeclare": "off",
+    "new-parens": "off",
+    "@typescript-eslint/no-unused-vars": ["off"],
+    "import/no-webpack-loader-syntax": "off",
+    "import/first": "off"
+  }
+}
