@@ -1,12 +1,15 @@
+require('dotenv').config({
+  debug: true
+})
 import express from 'express'
 import serveStatic from 'serve-static'
 import logger from 'morgan'
 import bodyParser from 'body-parser'
 
-import go from './routes/global'
-import wechatRouter from './routes/wechat'
+import wechatRouter from './routes/wechat/wechat'
 
 const app = express()
+const PORT = 4100
 
 app.use(logger('short'))
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -22,8 +25,6 @@ app.get('/', function (req, res) {
   res.status(200).send('Welcome to Anywhere Node Server!')
 })
 
-app.listen(4100, function () {
-  console.log('Server is running on 18080!')
+app.listen(PORT, function () {
+  console.log(`Server is running on ${PORT}!`)
 })
-
-go.updateMenu()

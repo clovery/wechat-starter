@@ -1,7 +1,7 @@
 ﻿{
     "button": [
     {
-        "name": "报表",
+        "name": "Wei报表",
         "sub_button": [{
             "type": "click",
             "name": "获取列表",

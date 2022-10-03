@@ -1,6 +1,7 @@
 import express from 'express'
 import wechat from 'wechat'
 import global from './global'
+import { oauth } from './oauth'
 
 var router = express.Router({})
 
@@ -19,49 +20,11 @@ var eventArray = [
   'location_select'
 ]
 
-router.post('/oauth', function (req, res) {
-  console.log('go to oauth!')
-
-  var code = req.body.code
-
-  global.wechatOAuth.getAccessToken(code, function (err: Error, baseUserInfo: any) {
-    if (err) {
-      console.error(err)
-      res.send(500)
-      return
-    } else {
-      var query = { openid: baseUserInfo.data.openid }
-      //var query = {openid : "oQ7SJt08meDJyOXyUwrZ3_b4FTNc"};
-      global.collection.customer.find(query, function (err: Error, userData: any) {
-        if (err) {
-          res.status(500).send(err)
-          return
-        }
-
-        var resData: any = {}
-
-        if (userData.length > 0) {
-          resData.isLogin = true
-        } else {
-          resData.isLogin = false
-        }
-        global.wechatOAuth.getUser(query, function (err: Error, wechatUserInfo: any) {
-          if (err) {
-            res.status(500).send(err)
-            return
-          }
-          resData.userinfo = wechatUserInfo
-          res.status(200).send(resData)
-          return
-        })
-      })
-    }
-  })
-})
+router.post('/oauth', oauth)
 
 router.use(
   '/*',
-  wechat(global.config.base)
+  wechat(global.wechatConfig)
     .text(function (message: string, req: any, res: any) {
       console.log('=== text message received ===')
       console.log(message)
