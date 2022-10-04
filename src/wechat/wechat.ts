@@ -13,3 +13,8 @@ export default {
   oauth: wechatOAuth,
   api: wechatAPI
 }
+
+export const Wechat = {
+  oauth: wechatOAuth,
+  api: wechatAPI
+}
