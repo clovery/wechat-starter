@@ -33,18 +33,7 @@ export const fallback = wechat(global.wechatConfig)
       console.error(e)
     }
   })
-  .event(function (message: any, req: any, res: any) {
-    console.log('=== event message received ===')
-    console.log(message)
-
-    if (message.Event === 'subscribe') {
-      res.reply('Got your text message, test!')
-    } else if (message.Event === 'unsubscribe') {
-      res.reply('Got your text message, test!')
-    } else {
-      console.log('Got your event message, your event type:' + message.Event)
-    }
-  })
+  .event(event)
   .voice(function () {
     console.warn('voice not implemented')
   })
@@ -55,3 +44,26 @@ export const fallback = wechat(global.wechatConfig)
     console.warn('link not implemented')
   })
   .middlewarify()
+
+type EventMessage = {
+  ToUserName: string
+  FromUserName: string
+  CreateTime: string
+  MsgType: string
+  Event: 'subscribe'
+  EventKey: string
+}
+
+function event(message: EventMessage, req: any, res: any) {
+  console.log('=== event message received ===')
+  console.log(message)
+
+
+  if (message.Event === 'subscribe') {
+    res.reply('Got your text message, test!')
+  } else if (message.Event === 'unsubscribe') {
+    res.reply('Got your text message, test!')
+  } else {
+    console.log('Got your event message, your event type:' + message.Event)
+  }
+}

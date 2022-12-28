@@ -1,3 +1,5 @@
+/// <reference path="./express-env.d.ts" />
+
 require('dotenv').config({
   debug: true
 })
